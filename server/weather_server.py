@@ -65,7 +65,13 @@ async def _resolve_adcode(city_name: Optional[str] = None) -> Tuple[Optional[str
 @mcp.tool()
 async def get_amap_weather_now(city_name: str = None) -> str:
     """
-    异步获取当前的实时天气情况。
+    获取当前城市的天气情况。
+
+    Args:
+        city_name (str): 城市名称。如果为 None，则使用 IP 地址进行定位。
+
+    Returns:
+        str: 天气信息字符串，包含天气、气温、湿度、风力、更新时间。
     """
     # 注意：这里需要 await 调用异步函数
     adcode, display_name = await _resolve_adcode(city_name)
@@ -92,7 +98,13 @@ async def get_amap_weather_now(city_name: str = None) -> str:
 @mcp.tool()
 async def get_amap_weather_forecast(city_name: str = None) -> str:
     """
-    异步获取未来几天（含今天）的天气预报情况。
+    获取未来几天（含今天）的天气预报情况。
+
+    Args:
+        city_name (str): 城市名称。如果为 None，则使用 IP 地址进行定位。
+
+    Returns:
+        str: 天气预报信息字符串，包含预报日期、天气、气温范围。
     """
     adcode, display_name = await _resolve_adcode(city_name)
     if not adcode:

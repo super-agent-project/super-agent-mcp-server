@@ -50,10 +50,9 @@ server
 * 启动天气查询 MCP Server
 
 ```shell
-# 新开终端
+# new terminal
 cd super-agent-mcp-server/server
 
-# 启动天气查询 MCP Server
 uv run weather_server.py
 ```
 
@@ -62,10 +61,9 @@ uv run weather_server.py
 * 启动学术研究 MCP Server
 
 ```shell
-# 新开终端
+# new terminal
 cd super-agent-mcp-server/server
 
-# 启动学术研究 MCP Server
 uv run research_server.py
 ```
 

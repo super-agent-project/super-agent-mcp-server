@@ -147,28 +147,28 @@ def get_topic_papers(topic: str) -> str:
     papers_file = os.path.join(PAPER_DIR, topic_dir, "papers_info.json")
 
     if not os.path.exists(papers_file):
-        return f"# No papers found for topic: {topic}\n\nTry searching for papers on this topic first."
+        return f"No papers found for topic: **{topic}**\n\nTry searching for papers on this topic first."
 
     try:
         with open(papers_file, 'r') as f:
             papers_data = json.load(f)
 
         # Create markdown content with paper details
-        content = f"# Papers on {topic.replace('_', ' ').title()}\n\n"
+        content = f"## Papers on {topic.replace('_', ' ').title()}\n\n"
         content += f"Total papers: {len(papers_data)}\n\n"
 
         for paper_id, paper_info in papers_data.items():
-            content += f"## {paper_info['title']}\n"
+            content += f"### {paper_info['title']}\n"
             content += f"- **Paper ID**: {paper_id}\n"
             content += f"- **Authors**: {', '.join(paper_info['authors'])}\n"
             content += f"- **Published**: {paper_info['published']}\n"
             content += f"- **PDF URL**: [{paper_info['pdf_url']}]({paper_info['pdf_url']})\n\n"
-            content += f"### Summary\n{paper_info['summary'][:500]}...\n\n"
+            content += f"#### Summary\n{paper_info['summary'][:500]}...\n\n"
             content += "---\n\n"
 
         return content
     except json.JSONDecodeError:
-        return f"# Error reading papers data for {topic}\n\nThe papers data file is corrupted."
+        return f"#### Error reading papers data for {topic}\n\nThe papers data file is corrupted."
 
 @mcp.prompt()
 def generate_search_prompt(topic: str, num_papers: int = 5) -> str:
@@ -195,6 +195,7 @@ Follow these instructions:
 4. Organize your findings in a clear, structured format with headings and bullet points for easy readability.
 
 Please present both detailed information about each paper and a high-level synthesis of the research landscape in {topic}."""
+
 
 if __name__ == "__main__":
     # Initialize and run the server
